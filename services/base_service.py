@@ -14,7 +14,7 @@ class BaseService(object):
         instance = self.get_by_id(id)
         instance.delete_instance()
 
-    def add(self, **kwargs):
-        instance = self.model(**kwargs)
+    def add(self, data):
+        instance = self.model(**data)
         instance.save()
         return instance

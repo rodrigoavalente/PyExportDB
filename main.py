@@ -3,7 +3,7 @@ import platform
 from dbmanager.dbmanager import DatabaseManager
 
 from utils.startup_utils import create_dbsqlite, create_needed_directories
-from dbaccessor.db import connect_to_local_db
+from dbaccessor.db import connect_to_local_db, disconnect_from_local_db
 from services.host_service import HostService
 
 
@@ -17,8 +17,12 @@ def main():
     connect_to_local_db()
 
     service = HostService()
-    host = service.add(username='postgres', password='master', host_url='10.2.25.230')
+    host = service.add({
+        'username': 'postgres',
+        'password': 'master',
+        'host_url': '10.2.25.230'})
     print(host)
+    disconnect_from_local_db()
 
 if __name__ == "__main__":
     main()
