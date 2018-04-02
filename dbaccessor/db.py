@@ -11,10 +11,12 @@ class BaseModel(Model):
         database = db
 
 
-class HostModel(BaseModel):
+class HostModel(BaseModel):    
     username = CharField(max_length=63)
     password = CharField(max_length=63)
+    
     host_url = CharField()
+    description = CharField()
 
     def __str__(self):
         return "postgresql://{}:{}@{}:5432".format(self.username, self.password, self.host_url)
