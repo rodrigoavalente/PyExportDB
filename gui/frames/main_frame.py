@@ -1,5 +1,6 @@
 import wx
 from configuration import ItensIDs
+from dbaccessor.db import disconnect_from_local_db
 from gui.widgets.menu_bar.menu_bar import ExportDBMenuBar
 
 
@@ -25,6 +26,7 @@ class MainFrame(wx.Frame):
 
     def OnExit(self, event):
         """Close the frame, terminating the application."""
+        disconnect_from_local_db()
         self.Close(True)
 
     def OnHello(self, event):
