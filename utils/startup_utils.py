@@ -1,5 +1,7 @@
 import os
+import sys
 from pathlib2 import Path
+from .postgres_tools import pg_dump, pg_restore
 from configuration import ROOT_PATH
 
 def create_needed_directories():
@@ -17,3 +19,12 @@ def create_dbsqlite():
         with open(path, "wb"):
             os.utime(path, None)
 
+def check_postgres_tools():
+    try:
+        pg_dump()
+    except Exception as e:
+        sys.stderr.write(str(e) + "\n")
+    try:
+        pg_restore()
+    except Exception as e:
+        sys.stderr.write(str(e) + "\n")
