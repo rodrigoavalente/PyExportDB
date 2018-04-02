@@ -1,6 +1,7 @@
 import wx
 from configuration import ItensIDs
 from gui.widgets.menu_bar.menu_bar import ExportDBMenuBar
+from gui.widgets.dialogs.connection_dialog import AddNewConnectionDialog
 
 
 class MainFrame(wx.Frame):
@@ -18,20 +19,23 @@ class MainFrame(wx.Frame):
         self.SetStatusText("Bem Vindo ao PyExportDB")
 
     def append_events(self):
-        self.Bind(wx.EVT_MENU, self.OnExit,
+        self.Bind(wx.EVT_MENU, self.on_exit,
                   self.menu.get_item("file", wx.ID_EXIT))
-        self.Bind(wx.EVT_MENU, self.OnAbout, self.menu.get_item(
+        self.Bind(wx.EVT_MENU, self.on_about, self.menu.get_item(
             "help", ItensIDs.ABOUT.value))
+        self.Bind(wx.EVT_MENU, self.on_add_new_connection,
+                  self.menu.get_item("file", ItensIDs.NEW_DB_CONN.value))
 
-    def OnExit(self, event):
+    def on_exit(self, event):
         """Close the frame, terminating the application."""
         self.Close(True)
 
-    def OnHello(self, event):
-        """Say hello to the user."""
-        wx.MessageBox("Hello again from wxPython")
-
-    def OnAbout(self, event):
+    def on_about(self, event):
         wx.MessageBox("Assistente para gerenciar importação e exportação de arquivos de banco de dados.",
                       "PyExportDB",
                       wx.OK | wx.ICON_INFORMATION)
+
+    def on_add_new_connection(self, event):
+        dialog = AddNewConnectionDialog(None)
+        dialog.ShowModal()
+        dialog.Destroy()
