@@ -16,7 +16,7 @@ class HostModel(BaseModel):
     password = CharField(max_length=63)
     
     host_url = CharField()
-    description = CharField()
+    description = CharField(unique=True)
 
     def __str__(self):
         return "postgresql://{}:{}@{}:5432".format(self.username, self.password, self.host_url)

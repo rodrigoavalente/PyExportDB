@@ -32,6 +32,9 @@ class DatabaseManager(object):
             sys.stderr.write("[ERROR] Database password must be provided.")
             sys.stderr.flush()
 
+    def test_connection(self):
+        self.__connect()
+
     def __connect(self):
         if self.connection is None:
             try:
